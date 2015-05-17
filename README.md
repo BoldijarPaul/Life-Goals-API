@@ -1,4 +1,4 @@
-# **Life-Goals-Api **
+#Life-Goals-Api
 
 This project is made with **Jersey**, is the RESTful service for the **Life Goals App**.
 

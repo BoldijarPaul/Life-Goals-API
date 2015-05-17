@@ -2,7 +2,9 @@ package com.lifegoals.app.client.examples;
 
 import java.util.List;
 
-import com.lifegoals.app.client.locator.ClientContext;
+
+
+import com.lifegoals.app.client.locator.context.Context;
 import com.lifegoals.app.client.management.ClientUserManagement;
 import com.lifegoals.app.entities.LoginInfo;
 import com.lifegoals.app.entities.LoginResult;
@@ -13,8 +15,8 @@ public class UserExamples {
 
 	private static void loginExample() {
 		LoginInfo info = new LoginInfo();
-		info.setName("name");
-		info.setPassword("blabla");
+		info.setName("paul");
+		info.setPassword("paul");
 
 		LoginResult loginResult = ClientUserManagement.login(info);
 		System.out.println(loginResult.isSuccess());
@@ -23,7 +25,7 @@ public class UserExamples {
 	private static void showUsers() {
 
 		 
-
+Context.setToken("Token");
 		List<User> users = ClientUserManagement.getAllUsers();
 		String text = "";
 		for (User user : users) {
@@ -34,5 +36,6 @@ public class UserExamples {
 
 	public static void main(String[] args) {
 		showUsers();
+		loginExample();
 	}
 }

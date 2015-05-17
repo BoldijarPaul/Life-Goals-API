@@ -2,8 +2,7 @@ package com.lifegoals.app.client.examples;
 
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.lifegoals.app.client.locator.ClientContext;
+import com.lifegoals.app.client.locator.context.Context;
 import com.lifegoals.app.client.management.ClientSavedGoalManagement;
 import com.lifegoals.app.entities.SavedGoal;
 import com.lifegoals.app.entities.User;
@@ -11,7 +10,7 @@ import com.lifegoals.app.entities.User;
 public class SavedGoalsExampls {
 
 	private static void getGoalsExample() {
-		ClientContext.setToken("Token");
+		Context.setToken("Token");
 		User user = new User();
 		user.setId(1);
 
@@ -26,14 +25,14 @@ public class SavedGoalsExampls {
 	 
 	private static void addSavedGoal(){
 	 
-		ClientContext.setToken("Token");
+	Context.setToken("Token");
 		SavedGoal savedGoal=new SavedGoal();
 		savedGoal.setGoalId(1);
 		savedGoal.setUserId(1);
 		ClientSavedGoalManagement.addSavedGoal(savedGoal);
 	}
 	private static void deleteSavedGoal(){
-		ClientContext.setToken("Token");
+		Context.setToken("Token");
 		SavedGoal savedGoal=new SavedGoal();
 		savedGoal.setId(1);
 		savedGoal.setUserId(1);

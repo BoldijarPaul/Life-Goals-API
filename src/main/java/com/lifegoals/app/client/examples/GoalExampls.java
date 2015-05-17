@@ -2,8 +2,7 @@ package com.lifegoals.app.client.examples;
 
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.lifegoals.app.client.locator.ClientContext;
+import com.lifegoals.app.client.locator.context.Context;
 import com.lifegoals.app.client.management.ClientGoalManagement;
 import com.lifegoals.app.entities.Goal;
 
@@ -18,19 +17,22 @@ public class GoalExampls {
 	}
 
 	private static void addGoalExample() {
-		ClientContext.setToken("Token");
+	Context.setToken("Token");
 
 		Goal goal = new Goal();
-		goal.setText("Surfing yay <3");
+		goal.setText("I love goals so sssmuch");
 		goal.setId(3);
 		goal.setUserId(1);
 
-		ClientGoalManagement.addGoal(goal);
+		Goal goal2=ClientGoalManagement.addGoal(goal);
+		 
+		
 	}
 
 	private static void deleteGoalExample() {
 		// add a goal
-		ClientContext.setToken("Token");
+		Context.setToken("Token");
+		
 		Goal goal = new Goal();
 		goal.setText("Testing delete goal");
 		goal.setId(3);
@@ -50,8 +52,15 @@ public class GoalExampls {
 
 	}
 
+	 
 	public static void main(String[] args) {
- 
-		 deleteGoalExample();
+		System.setProperty("http.proxyHost", "localhost");
+	    System.setProperty("http.proxyPort", "8888");
+	    Context.setToken("Token");
+		
+		 
+		addGoalExample();
+		 
+		 getGoalsExample();
 	}
 }
