@@ -3,7 +3,6 @@ package com.lifegoals.app.entities;
 public class Token {
 	private int id;
 	private String key;
-	private long expirationDate;
 
 	private int userId;
 	private User user;
@@ -40,12 +39,6 @@ public class Token {
 		this.key = key;
 	}
 
-	public long getExpirationDate() {
-		return expirationDate;
-	}
-
-	public void setExpirationDate(long expirationDate) {
-		this.expirationDate = expirationDate;
-	}
+	 
 
 }

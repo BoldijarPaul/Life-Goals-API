@@ -13,7 +13,7 @@ public class UserManagementDemoImpl implements IUserManagement {
 	private static List<User> users = new ArrayList<User>();
 
 	public UserManagementDemoImpl() {
-		users.add(new User(1, "blabla", "name", System.currentTimeMillis()));
+		users.add(new User(1, "paul", "paul", System.currentTimeMillis()));
 		users.add(new User(2, "blabla", "da", System.currentTimeMillis()));
 		users.add(new User(3, "blabla", "nu", System.currentTimeMillis()));
 		users.add(new User(4, "blabla", "poate", System.currentTimeMillis()));

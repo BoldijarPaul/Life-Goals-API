@@ -3,7 +3,9 @@ package com.lifegoals.app.client.locator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.PartialRequestBuilder;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.WebResource.Builder;
 
 public class ClientContext {
 
@@ -19,17 +21,31 @@ public class ClientContext {
 		return client;
 	}
 
+	private static String token = null;
+
+	public static void setToken(String token) {
+		ClientContext.token = token;
+	}
+
 	public static ClientResponse doGet(String path) {
 		WebResource webResource = getClient().resource(ROOT + path);
-		ClientResponse response = webResource.accept("application/json").get(
-				ClientResponse.class);
+		Builder builder = webResource.accept("application/json");
+		if (token != null) {
+			/* we have a token, use it */
+			builder.header("Token", token);
+		}
+		ClientResponse response = builder.get(ClientResponse.class);
 		return response;
 	}
 
 	public static ClientResponse doPost(String path, Object body) {
 		WebResource webResource = getClient().resource(ROOT + path);
-		ClientResponse response = webResource.accept("application/json").post(
-				ClientResponse.class, body);
+		Builder builder = webResource.accept("application/json");
+		if (token != null) {
+			/* we have a token, use it */
+			builder.header("Token", token);
+		}
+		ClientResponse response = builder.post(ClientResponse.class, body);
 		return response;
 	}
 }

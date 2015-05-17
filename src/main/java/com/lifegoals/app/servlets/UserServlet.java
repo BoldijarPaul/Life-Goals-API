@@ -3,6 +3,7 @@ package com.lifegoals.app.servlets;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -22,8 +23,17 @@ public class UserServlet {
 	@GET
 	@Path("/getall")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getAll() {
-		return ServiceLocator.get().getUserManagement().getAllUsers();
+	public Response getAll(@HeaderParam("Token") String token) {
+		if (!EntityValidationHelper.tokenValid(token)) {
+			return Response.status(Response.Status.UNAUTHORIZED)
+					.entity("You don't have access")
+					.build();
+		}
+
+		/* the token is valid */
+		List<User> users = ServiceLocator.get().getUserManagement()
+				.getAllUsers();
+		return Response.ok(users, MediaType.APPLICATION_JSON).build();
 	}
 
 	@GET

@@ -11,11 +11,14 @@ import com.lifegoals.app.service.interf.ITokenManagement;
 public class TokenManagementDemoImpl implements ITokenManagement {
 
 	private static List<Token> tokens = new ArrayList<Token>();
+
 	/* how many time the token is valid , now 60 seconds */
-	private static final long TOKEN_TIME = 60 * 1000;
 
 	public TokenManagementDemoImpl() {
-
+		Token token=new Token();
+		token.setId(0);
+		token.setKey(UUID.randomUUID().toString());
+		token.setUserId(1);
 	}
 
 	/* creating a token for a user */
@@ -34,9 +37,8 @@ public class TokenManagementDemoImpl implements ITokenManagement {
 			token.setId(tokens.get(tokens.size() - 1).getId() + 1);
 		token.setUserId(userId);
 
-		/* setting a random string key and expiration time */
+		/* setting a random string key */
 		token.setKey(UUID.randomUUID().toString());
-		token.setExpirationDate(System.currentTimeMillis() + TOKEN_TIME);
 
 		/* adding to the list */
 		tokens.add(token);
@@ -59,8 +61,17 @@ public class TokenManagementDemoImpl implements ITokenManagement {
 
 	@Override
 	public List<Token> getAllTokens() {
-		// TODO Auto-generated method stub
 		return tokens;
+	}
+
+	@Override
+	public Token getTokenByHash(String hash) {
+		for (Token token : tokens) {
+			if (token.getKey().equals(hash)) {
+				return token;
+			}
+		}
+		return null;
 	}
 
 }

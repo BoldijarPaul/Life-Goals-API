@@ -11,5 +11,7 @@ public interface ITokenManagement {
 	public List<Token> deleteUserTokens(int userId);
 
 	public List<Token> getAllTokens();
+	
+	public Token getTokenByHash(String hash);
 
 }

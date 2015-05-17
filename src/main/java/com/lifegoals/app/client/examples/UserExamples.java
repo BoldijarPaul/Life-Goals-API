@@ -11,7 +11,7 @@ import com.sun.jersey.api.client.ClientResponse;
 
 public class UserExamples {
 
-	private void loginExample() {
+	private static void loginExample() {
 		LoginInfo info = new LoginInfo();
 		info.setName("name");
 		info.setPassword("blabla");
@@ -20,7 +20,19 @@ public class UserExamples {
 		System.out.println(loginResult.isSuccess());
 	}
 
-	public static void main(String[] args) {
+	private static void showUsers() {
 
+		 
+
+		List<User> users = ClientUserManagement.getAllClients();
+		String text = "";
+		for (User user : users) {
+			text += user.getName() + " ";
+		}
+		System.out.println(text);
+	}
+
+	public static void main(String[] args) {
+		showUsers();
 	}
 }

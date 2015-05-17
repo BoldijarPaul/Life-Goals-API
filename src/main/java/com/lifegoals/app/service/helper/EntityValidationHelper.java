@@ -1,7 +1,6 @@
 package com.lifegoals.app.service.helper;
 
-import javax.xml.ws.ServiceMode;
-
+import com.lifegoals.app.entities.Token;
 import com.lifegoals.app.entities.User;
 import com.lifegoals.app.service.ServiceLocator;
 
@@ -19,7 +18,19 @@ public class EntityValidationHelper {
 		if (ServiceLocator.get().getUserManagement()
 				.usernameIsTaken(user.getName()))
 			return false;
-		
+
+		return true;
+	}
+
+	public static boolean tokenValid(String hash) {
+		if (hash == null)
+			return false;
+		Token token = ServiceLocator.get().getTokenManagement()
+				.getTokenByHash(hash);
+		if (token == null)
+			return false;
+
+		/* token valid */
 		return true;
 	}
 }
