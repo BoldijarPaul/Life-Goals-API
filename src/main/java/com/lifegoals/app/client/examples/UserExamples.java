@@ -1,4 +1,4 @@
-package com.lifegoals.app.client.locator.examples;
+package com.lifegoals.app.client.examples;
 
 import java.util.List;
 
