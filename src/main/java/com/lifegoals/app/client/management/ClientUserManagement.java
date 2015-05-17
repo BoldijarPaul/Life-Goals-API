@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.lifegoals.app.client.locator.ClientContext;
+import com.lifegoals.app.entities.LoginInfo;
+import com.lifegoals.app.entities.LoginResult;
 import com.lifegoals.app.entities.User;
 
 public class ClientUserManagement {
@@ -17,6 +19,11 @@ public class ClientUserManagement {
 	/* adds a new user */
 	public static User addUser(User user) {
 		return ClientContext.doPost("users/add", user).getEntity(User.class);
+	}
+
+	public static LoginResult login(LoginInfo loginInfo) {
+		return ClientContext.doPost("users/login", loginInfo).getEntity(
+				LoginResult.class);
 	}
 
 }

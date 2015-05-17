@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.lifegoals.app.entities.LoginInfo;
 import com.lifegoals.app.entities.LoginResult;
 import com.lifegoals.app.entities.User;
 import com.lifegoals.app.service.ServiceLocator;
@@ -32,13 +33,12 @@ public class UserServlet {
 		return ServiceLocator.get().getUserManagement().getUserById(id);
 	}
 
-	@GET
-	@Path("/login/{name}/{password}")
+	@POST
+	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
-	public LoginResult getUserById(@PathParam("name") String name,
-			@PathParam("password") String password) {
+	public LoginResult getUserById(LoginInfo info) {
 		return ServiceLocator.get().getUserManagement()
-				.getLoginResult(name, password);
+				.getLoginResult(info.getName(), info.getPassword());
 	}
 
 	@POST
