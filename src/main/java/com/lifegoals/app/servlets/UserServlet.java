@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -37,6 +38,13 @@ public class UserServlet {
 			@PathParam("password") String password) {
 		return ServiceLocator.get().getUserManagement()
 				.getLoginResult(name, password);
+	}
+
+	@POST
+	@Path("/add")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User addUser(User user) {
+		return ServiceLocator.get().getUserManagement().addUser(user);
 	}
 
 }
