@@ -1,6 +1,5 @@
 package com.lifegoals.app.servlets;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -9,10 +8,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.lifegoals.app.entities.LoginResult;
 import com.lifegoals.app.entities.User;
 import com.lifegoals.app.service.ServiceLocator;
+import com.lifegoals.app.service.helper.EntityValidationHelper;
 
 @Path("/users")
 public class UserServlet {
@@ -43,8 +44,16 @@ public class UserServlet {
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
-	public User addUser(User user) {
-		return ServiceLocator.get().getUserManagement().addUser(user);
+	public Response addUser(User user) {
+		if (!EntityValidationHelper.userValid(user)) {
+			// user not valid to add
+			return Response.status(Response.Status.BAD_REQUEST)
+					.entity("The user is invalid or name already taken")
+					.build();
+		}
+		return Response.ok(
+				ServiceLocator.get().getUserManagement().addUser(user),
+				MediaType.APPLICATION_JSON).build();
 	}
 
 }

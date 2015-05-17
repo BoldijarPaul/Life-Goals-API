@@ -14,6 +14,7 @@ public class ClientUserManagement {
 				User[].class));
 	}
 
+	/* adds a new user */
 	public static User addUser(User user) {
 		return ClientContext.doPost("users/add", user).getEntity(User.class);
 	}

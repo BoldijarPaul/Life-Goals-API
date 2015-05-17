@@ -62,4 +62,13 @@ public class UserManagementDemoImpl implements IUserManagement {
 		// TODO Auto-generated method stub
 		return users;
 	}
+
+	@Override
+	public boolean usernameIsTaken(String username) {
+		List<User> users = getAllUsers();
+		for (User user : users)
+			if (user.getName().toLowerCase().equals(username.toLowerCase()))
+				return true;
+		return false;
+	}
 }
