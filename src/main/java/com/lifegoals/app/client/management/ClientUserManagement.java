@@ -11,7 +11,7 @@ import com.lifegoals.app.entities.User;
 public class ClientUserManagement {
 
 	/* returns all the clients on the server */
-	public static List<User> getAllClients() {
+	public static List<User> getAllUsers() {
 		return Arrays.asList(ClientContext.doGet("users/getall").getEntity(
 				User[].class));
 	}

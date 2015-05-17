@@ -23,10 +23,68 @@ To check if the login was successful or not check the success value from the Log
 **User management**
 
 
+###Adding a new user
+This request does not require a token.
 
-
-####To add a new user:
-    ClientUserManagement.addUser(user);
+```ClientUserManagement.addUser(user);``` 
     
-  This returns the user if it was successfuly added.
+This returns the user if it was successfully added.
+
+###Getting all users
+This request does require a token.
+
+```ClientUserManagement.getAllUsers();``` 
+    
+This returns a list of users if success.
+
+#**Goals management**
+
+
+###Adding a new goal
+This request does require a token.
+Don't forget to set all the goal fields.
+
+```ClientGoalManagement.addGoal(goal);``` 
+    
+This returns the goal if it was successfully added.
+
+###Deleting a goal
+This request does require a token.
+
+```ClientGoalManagement.deleteGoal(goal);``` 
+    
+This returns the goal if it was successfully deleted.
+
+###Getting all goals
+This request does not require a token.
+
+```ClientGoalManagement.getAllGoals();``` 
+    
+This returns a list of goals if success.
+
+#**Saved goals management**
+A user can have more saved goals, a saved goal will be a goal that has a boolean done, which is true or false.
+This can be viewed only by the user.
+
+###Adding a new saved goal
+This request does require a token.
+Don't forget to set all the goal fields.
+
+```ClientSavedGoalManagement.addSavedGoal(savedGoal);``` 
+    
+This returns the saved goal if it was successfully added.
+
+###Deleting a goal
+This request does require a token.
+
+```ClientSavedGoalManagement.deleteSavedGoal(savedGoal);``` 
+    
+This returns the saved goal if it was successfully deleted.
+
+###Getting all goals
+This request does  require a token.
+
+```ClientSavedGoalManagement.getUserSavedGoals(user);``` 
+    
+This returns a list of saved goals if success.
 

@@ -12,5 +12,7 @@ public interface IGoalManagement {
 	public Goal deleteGoal(int id);
 
 	public Goal addGoal(Goal goal);
+	
+	public Goal getGoalById(int id);
 
 }

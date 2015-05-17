@@ -1,6 +1,7 @@
 package com.lifegoals.app.service.helper;
 
 import com.lifegoals.app.entities.Goal;
+import com.lifegoals.app.entities.SavedGoal;
 import com.lifegoals.app.entities.Token;
 import com.lifegoals.app.entities.User;
 import com.lifegoals.app.service.ServiceLocator;
@@ -50,5 +51,11 @@ public class EntityValidationHelper {
 		if (token == null)
 			return false;
 		return token.getUserId() == userId;
+	}
+
+	public static boolean savedGoalValid(SavedGoal savedGoal) {
+		if (savedGoal.getGoalId() == 0)
+			return false;
+		return true;
 	}
 }

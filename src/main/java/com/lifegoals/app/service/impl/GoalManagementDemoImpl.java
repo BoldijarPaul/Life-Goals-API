@@ -17,6 +17,13 @@ public class GoalManagementDemoImpl implements IGoalManagement {
 		goal.setText("I like turtles");
 		goal.setUserId(1);
 		goals.add(goal);
+
+		Goal goal2 = new Goal();
+		goal2.setId(2);
+		goal2.setColor(Color.RED.getRGB());
+		goal2.setText("Surfing");
+		goal2.setUserId(1);
+		goals.add(goal2);
 	}
 
 	@Override
@@ -51,6 +58,16 @@ public class GoalManagementDemoImpl implements IGoalManagement {
 	public Goal addGoal(Goal goal) {
 		goals.add(goal);
 		return goal;
+	}
+
+	@Override
+	public Goal getGoalById(int id) {
+		for (Goal goal : goals) {
+			if (goal.getId() == id) {
+				return goal;
+			}
+		}
+		return null;
 	}
 
 }

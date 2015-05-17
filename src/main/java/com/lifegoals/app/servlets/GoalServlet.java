@@ -23,7 +23,7 @@ public class GoalServlet {
 	@Path("/getall")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Goal> getAll() {
-		return ServiceLocator.get().get().getGoalManagement().getAllGoals();
+		return ServiceLocator.get().getGoalManagement().getAllGoals();
 	}
 
 	@GET

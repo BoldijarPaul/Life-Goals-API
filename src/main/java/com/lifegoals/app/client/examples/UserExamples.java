@@ -24,7 +24,7 @@ public class UserExamples {
 
 		 
 
-		List<User> users = ClientUserManagement.getAllClients();
+		List<User> users = ClientUserManagement.getAllUsers();
 		String text = "";
 		for (User user : users) {
 			text += user.getName() + " ";
