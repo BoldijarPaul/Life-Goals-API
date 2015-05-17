@@ -21,6 +21,7 @@ public class ClientUserManagement {
 		return ClientContext.doPost("users/add", user).getEntity(User.class);
 	}
 
+	/* tries to login and return a LoginResult which also has a token */
 	public static LoginResult login(LoginInfo loginInfo) {
 		return ClientContext.doPost("users/login", loginInfo).getEntity(
 				LoginResult.class);
