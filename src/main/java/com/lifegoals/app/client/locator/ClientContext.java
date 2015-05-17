@@ -48,4 +48,14 @@ public class ClientContext {
 		ClientResponse response = builder.post(ClientResponse.class, body);
 		return response;
 	}
+	public static ClientResponse doDelete(String path, Object body) {
+		WebResource webResource = getClient().resource(ROOT + path);
+		Builder builder = webResource.accept("application/json");
+		if (token != null) {
+			/* we have a token, use it */
+			builder.header("Token", token);
+		}
+		ClientResponse response = builder.delete(ClientResponse.class, body);
+		return response;
+	}
 }

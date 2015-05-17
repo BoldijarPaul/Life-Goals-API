@@ -1,5 +1,6 @@
 package com.lifegoals.app.service.impl;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,15 @@ import com.lifegoals.app.service.interf.IGoalManagement;
 
 public class GoalManagementDemoImpl implements IGoalManagement {
 	private List<Goal> goals = new ArrayList<Goal>();
+
+	public GoalManagementDemoImpl() {
+		Goal goal = new Goal();
+		goal.setId(1);
+		goal.setColor(Color.CYAN.getRGB());
+		goal.setText("I like turtles");
+		goal.setUserId(1);
+		goals.add(goal);
+	}
 
 	@Override
 	public List<Goal> getAllGoals() {
@@ -27,8 +37,14 @@ public class GoalManagementDemoImpl implements IGoalManagement {
 
 	@Override
 	public Goal deleteGoal(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Goal goal = null;
+		for (int i = 0; i < goals.size(); i++) {
+			if (goals.get(i).getId() == id) {
+				goal = goals.get(i);
+				goals.remove(i--);
+			}
+		}
+		return goal;
 	}
 
 	@Override

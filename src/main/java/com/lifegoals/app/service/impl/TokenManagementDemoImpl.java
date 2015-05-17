@@ -17,8 +17,9 @@ public class TokenManagementDemoImpl implements ITokenManagement {
 	public TokenManagementDemoImpl() {
 		Token token=new Token();
 		token.setId(0);
-		token.setKey(UUID.randomUUID().toString());
+		token.setKey("Token");
 		token.setUserId(1);
+		tokens.add(token);
 	}
 
 	/* creating a token for a user */
