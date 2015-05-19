@@ -5,9 +5,18 @@ public class Goal {
 	private int color;
 	private String text;
 	private int userId;
+	private boolean publicGoal;
 
 	public int getId() {
 		return id;
+	}
+
+	public boolean isPublicGoal() {
+		return publicGoal;
+	}
+
+	public void setPublicGoal(boolean publicGoal) {
+		this.publicGoal = publicGoal;
 	}
 
 	public void setId(int id) {

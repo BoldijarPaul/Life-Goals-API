@@ -40,6 +40,7 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 
 	@Override
 	public SavedGoal addSavedGoal(SavedGoal savedGoal) {
+		savedGoal.setId((int) (Math.random() * 1000));
 		savedGoals.add(savedGoal);
 		return savedGoal;
 	}
