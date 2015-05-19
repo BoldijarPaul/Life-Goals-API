@@ -68,4 +68,16 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 
 	}
 
+	@Override
+	public SavedGoal updateSavedGoal(SavedGoal savedGoal) {
+		for (int i = 0; i < savedGoals.size(); i++) {
+			SavedGoal goal = savedGoals.get(i);
+			if (goal.getId() == savedGoal.getId()) {
+				savedGoals.set(i, savedGoal);
+				return savedGoal;
+			}
+		}
+		return null;
+	}
+
 }

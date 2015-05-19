@@ -9,7 +9,7 @@ import com.lifegoals.app.entities.User;
 public class SavedGoalsExampls {
 
 	private static void getGoalsExample() {
-	 
+
 		User user = new User();
 		user.setId(1);
 
@@ -21,26 +21,34 @@ public class SavedGoalsExampls {
 		}
 	}
 
-	 
-	private static void addSavedGoal(){
-	 
-	 
-		SavedGoal savedGoal=new SavedGoal();
+	private static SavedGoal addSavedGoal() {
+
+		SavedGoal savedGoal = new SavedGoal();
 		savedGoal.setGoalId(1);
 		savedGoal.setUserId(1);
-		ClientSavedGoalManagement.addSavedGoal(savedGoal);
+		return ClientSavedGoalManagement.addSavedGoal(savedGoal);
 	}
-	private static void deleteSavedGoal(){
-		 
-		SavedGoal savedGoal=new SavedGoal();
+
+	private static void deleteSavedGoal() {
+
+		SavedGoal savedGoal = new SavedGoal();
 		savedGoal.setId(1);
 		savedGoal.setUserId(1);
 		ClientSavedGoalManagement.deleteSavedGoal(savedGoal);
 	}
 
-	public static void main(String[] args) {
+	private static void updateSavedGoal(SavedGoal goalToUpdate) {
 
-		addSavedGoal();
+		goalToUpdate.setDone(true);
+		ClientSavedGoalManagement.updateSavedGoal(goalToUpdate);
+	}
+
+	public static void main(String[] args) {
 		 
+		SavedGoal savedGoal = addSavedGoal();
+		getGoalsExample();
+		System.out.println("\n\n");
+		updateSavedGoal(savedGoal);
+		getGoalsExample();
 	}
 }

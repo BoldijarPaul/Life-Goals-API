@@ -16,4 +16,7 @@ public interface ISavedGoalManagement {
 	public SavedGoal deleteSavedGoal(int id);
 
 	public void loadSavedGoalsGoals(List<SavedGoal> goals);
+
+	/* will update the saved goal, by it's ID */
+	public SavedGoal updateSavedGoal(SavedGoal savedGoal);
 }

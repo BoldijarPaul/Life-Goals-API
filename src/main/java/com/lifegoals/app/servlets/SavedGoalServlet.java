@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -85,6 +86,28 @@ public class SavedGoalServlet {
 				ServiceLocator.get().getSavedGoalManagement()
 						.deleteSavedGoal(savedGoal.getId()),
 				MediaType.APPLICATION_JSON).build();
+	}
+
+	@PUT
+	@Path("/update")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateSavedGoal(SavedGoal savedGoal,
+			@HeaderParam("Token") String token) {
+		/* first check for token */
+		if (!EntityValidationHelper.tokenValid(token)) {
+			return Response.status(Response.Status.UNAUTHORIZED)
+					.entity("You don't have access").build();
+		}
+		if (!EntityValidationHelper.tokenValidForUser(token,
+				savedGoal.getUserId())) {
+			return Response.status(Response.Status.BAD_REQUEST)
+					.entity("The token does not belong to the selected user")
+					.build();
+		}
+		return Response
+				.ok(ServiceLocator.get().getSavedGoalManagement()
+						.updateSavedGoal(savedGoal), MediaType.APPLICATION_JSON)
+				.build();
 	}
 
 }

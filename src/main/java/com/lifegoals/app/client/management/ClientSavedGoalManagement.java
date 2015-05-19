@@ -19,4 +19,7 @@ public class ClientSavedGoalManagement {
 	public static SavedGoal deleteSavedGoal(SavedGoal savedGoal) {
 		return  AppContext.getContext().doDeleteRequest("savedgoals/delete", savedGoal,SavedGoal.class);
 	}
+	public static SavedGoal updateSavedGoal(SavedGoal savedGoal) {
+		return  AppContext.getContext().doPutRequest("savedgoals/update", savedGoal,SavedGoal.class);
+	}
 }
