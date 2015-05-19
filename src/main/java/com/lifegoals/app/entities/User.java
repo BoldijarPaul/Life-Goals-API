@@ -5,7 +5,6 @@ public class User {
 	private String password;
 	private String name;
 	private long createdDate;
-	private boolean admin = false;
 
 	public User() {
 
@@ -21,10 +20,6 @@ public class User {
 
 	public int getId() {
 		return id;
-	}
-
-	public boolean isAdmin() {
-		return admin;
 	}
 
 	public void setId(int id) {
