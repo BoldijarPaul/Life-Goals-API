@@ -7,6 +7,25 @@ public class LoginResult {
 	private Token token;
 	private int tokenId;
 
+	private User user;
+	private int userId;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	public boolean isSuccess() {
 		return success;
 	}
@@ -30,7 +49,5 @@ public class LoginResult {
 	public void setTokenId(int tokenId) {
 		this.tokenId = tokenId;
 	}
-
- 
 
 }

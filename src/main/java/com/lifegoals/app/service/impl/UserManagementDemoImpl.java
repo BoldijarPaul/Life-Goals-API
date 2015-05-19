@@ -44,6 +44,8 @@ public class UserManagementDemoImpl implements IUserManagement {
 						.addToken(user.getId());
 				loginResult.setToken(token);
 				loginResult.setTokenId(token.getId());
+				loginResult.setUserId(user.getId());
+				loginResult.setUser(user);
 				return loginResult;
 			}
 		}
