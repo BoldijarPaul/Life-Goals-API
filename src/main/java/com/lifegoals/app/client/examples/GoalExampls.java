@@ -2,7 +2,6 @@ package com.lifegoals.app.client.examples;
 
 import java.util.List;
 
-import com.lifegoals.app.client.locator.context.Context;
 import com.lifegoals.app.client.management.ClientGoalManagement;
 import com.lifegoals.app.entities.Goal;
 
@@ -17,8 +16,7 @@ public class GoalExampls {
 	}
 
 	private static void addGoalExample() {
-	Context.setToken("Token");
-
+	 
 		Goal goal = new Goal();
 		goal.setText("I love goals so sssmuch");
 		goal.setId(3);
@@ -31,7 +29,7 @@ public class GoalExampls {
 
 	private static void deleteGoalExample() {
 		// add a goal
-		Context.setToken("Token");
+	 
 		
 		Goal goal = new Goal();
 		goal.setText("Testing delete goal");
@@ -56,11 +54,12 @@ public class GoalExampls {
 	public static void main(String[] args) {
 		System.setProperty("http.proxyHost", "localhost");
 	    System.setProperty("http.proxyPort", "8888");
-	    Context.setToken("Token");
+	  
 		
+	    
+	   
+		//addGoalExample();
 		 
-		addGoalExample();
-		 
-		 getGoalsExample();
+		  getGoalsExample();
 	}
 }

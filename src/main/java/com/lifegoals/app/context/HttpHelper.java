@@ -1,4 +1,4 @@
-package com.lifegoals.app.client.locator.context;
+package com.lifegoals.app.context;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,33 +14,38 @@ public class HttpHelper {
 
 	/* the gson library will convert the json to objects */
 	private static Gson gson = new Gson();
-	
+
 	/* converts a json text to a object */
-	public static <T> T stringToObject(String json,Class<T> type){
+	public static <T> T stringToObject(String json, Class<T> type) {
 		return gson.fromJson(json, type);
 	}
+
 	/* reads the text from a httpurlconnection response */
-	public static String readHttpUrlConnectionResponse(HttpURLConnection urlConnection)
-			throws IOException {
+	public static String readHttpUrlConnectionResponse(
+			HttpURLConnection urlConnection) throws IOException {
 		InputStream inputStream = urlConnection.getInputStream();
 		String responseText = fromStream(inputStream);
 		return responseText;
 	}
 
-	/* creates a httpurlconnection for our requests. here we are setting the headers */;
-	public  static HttpURLConnection createHttpUrlConnection(String path,
-			String method, Object body,String token) throws IOException {
+	/*
+	 * creates a httpurlconnection for our requests. here we are setting the
+	 * headers
+	 */;
+
+	public static HttpURLConnection createHttpUrlConnection(String path,
+			String method, Object body, String token) throws IOException {
 		/* create a simple http url connection */
-		URL url = new URL(Context.ROOT + path);
+		URL url = new URL(path);
 		HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-		httpCon.setDoOutput(true);
+		boolean methodIsGet = method.toLowerCase().equals("get");
+		/* if we do a get request we must set this to false */;
+		httpCon.setDoOutput(!methodIsGet);
 		httpCon.setRequestMethod(method);
-		httpCon.setRequestProperty("Content-Typeccept", "application/json");
+		httpCon.setRequestProperty("Accept", "application/json");
 		httpCon.setRequestProperty("Content-Type", "application/json");
-		if(token!=null){
+		if (token != null) {
 			httpCon.setRequestProperty("Token", token);
-		}else{
-			System.out.println("toke is nul");
 		}
 		if (body != null) {
 			// if we have a body add it

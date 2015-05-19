@@ -9,7 +9,7 @@ To consume the api you must:
  For most of the requests you need an access token, you get it after logging in.
  You can set the token like this:
  
- ```ClientContext.setToken(token); ``` 
+ ```Context.setToken(token); ``` 
  
  
  ###Trying to login
