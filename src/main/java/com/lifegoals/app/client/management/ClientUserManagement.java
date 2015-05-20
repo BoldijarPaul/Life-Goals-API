@@ -29,8 +29,8 @@ public class ClientUserManagement {
 	}
 
 	/* returning the string name of the user with that userId */
-	public static String getUsernameByUserId(int userId) {
-		return AppContext.getContext().doPostRequest("users/getname", userId,
+	public static String getUsernameByUserId(User user) {
+		return AppContext.getContext().doPostRequest("users/getname", user,
 				String.class);
 	}
 

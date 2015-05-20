@@ -17,6 +17,7 @@ public interface IUserManagement {
 	/* checks if a username is already taken , this method is service side only */
 	public boolean usernameIsTaken(String username);
 
-	public String getUsernameByUserId(int id);
+	/* for this user id must be the only field not null */
+	public String getUsernameByUserId(User user);
 
 }

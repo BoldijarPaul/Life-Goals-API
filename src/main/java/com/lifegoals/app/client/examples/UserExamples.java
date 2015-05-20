@@ -20,8 +20,6 @@ public class UserExamples {
 
 	private static void showUsers() {
 
-		 
- 
 		List<User> users = ClientUserManagement.getAllUsers();
 		String text = "";
 		for (User user : users) {
@@ -31,7 +29,8 @@ public class UserExamples {
 	}
 
 	public static void main(String[] args) {
-		showUsers();
-		loginExample();
+		User user = new User();
+		user.setId(1);
+		System.out.println(ClientUserManagement.getUsernameByUserId(user));
 	}
 }

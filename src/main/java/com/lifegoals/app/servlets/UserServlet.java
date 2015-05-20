@@ -68,8 +68,9 @@ public class UserServlet {
 	@POST
 	@Path("/getname")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getUsernameById(int id) {
-		return ServiceLocator.get().getUserManagement().getUsernameByUserId(id);
+	public String getUsernameById(User user) {
+		return ServiceLocator.get().getUserManagement()
+				.getUsernameByUserId(user);
 	}
 
 }

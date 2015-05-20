@@ -75,10 +75,10 @@ public class UserManagementDemoImpl implements IUserManagement {
 	}
 
 	@Override
-	public String getUsernameByUserId(int id) {
-		for (User user : users) {
-			if (user.getId() == id) {
-				return user.getName();
+	public String getUsernameByUserId(User user1) {
+		for (User user2 : users) {
+			if (user1.getId() == user2.getId()) {
+				return user2.getName();
 			}
 		}
 		return null;
