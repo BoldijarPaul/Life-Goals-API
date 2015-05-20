@@ -67,6 +67,7 @@ public class GoalManagementDemoImpl implements IGoalManagement {
 
 	@Override
 	public Goal addGoal(Goal goal) {
+		goal.setId((int) (Math.random() * 1000));
 		goals.add(goal);
 
 		/* goal added, now create a saved goal for this guy */
