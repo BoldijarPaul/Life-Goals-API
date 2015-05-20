@@ -7,10 +7,22 @@ public class SavedGoal {
 	private int goalId;
 	private boolean done;
 	private Goal goal;
+	private long createdDate;
 
 	public int getId() {
 		return id;
 	}
+
+	
+	public long getCreatedDate() {
+		return createdDate;
+	}
+
+
+	public void setCreatedDate(long createdDate) {
+		this.createdDate = createdDate;
+	}
+
 
 	public void setId(int id) {
 		this.id = id;
