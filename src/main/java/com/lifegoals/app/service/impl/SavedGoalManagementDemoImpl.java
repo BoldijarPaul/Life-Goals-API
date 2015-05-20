@@ -1,30 +1,38 @@
 package com.lifegoals.app.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import com.google.gson.Gson;
 import com.lifegoals.app.entities.Goal;
 import com.lifegoals.app.entities.SavedGoal;
 import com.lifegoals.app.service.ServiceLocator;
+import com.lifegoals.app.service.helper.StoringHelper;
 import com.lifegoals.app.service.interf.ISavedGoalManagement;
 
 public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
-	private List<SavedGoal> savedGoals = new ArrayList<SavedGoal>();
+	private static List<SavedGoal> savedGoals = null;
 
 	public SavedGoalManagementDemoImpl() {
-		SavedGoal goal = new SavedGoal();
-		goal.setGoalId(1);
-		goal.setDone(false);
-		goal.setId(1);
-		goal.setUserId(1);
-		savedGoals.add(goal);
+		if (savedGoals == null) {
+			savedGoals = new ArrayList<SavedGoal>();
+			String goalsJson = StoringHelper.readFile("savedgoal");
+			if (goalsJson == null) {
+				save();
+				return;
+			}
+			SavedGoal[] goalArray = new Gson().fromJson(goalsJson,
+					SavedGoal[].class);
+			savedGoals.addAll(Arrays.asList(goalArray));
 
-		SavedGoal goal2 = new SavedGoal();
-		goal2.setGoalId(2);
-		goal2.setId(2);
-		goal2.setDone(true);
-		goal2.setUserId(1);
-		savedGoals.add(goal2);
+		}
+	}
+
+	private void save() {
+		String gson = new Gson().toJson(savedGoals.toArray());
+		System.out.println(gson);
+		StoringHelper.writeFile("savedgoal", gson);
 	}
 
 	@Override
@@ -44,6 +52,7 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 		savedGoal.setId((int) (Math.random() * 1000));
 		savedGoal.setCreatedDate(System.currentTimeMillis());
 		savedGoals.add(savedGoal);
+		save();
 		return savedGoal;
 	}
 
@@ -57,6 +66,7 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 				savedGoals.remove(i--);
 			}
 		}
+		save();
 		return goal;
 
 	}
@@ -80,6 +90,7 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 				return savedGoal;
 			}
 		}
+		save();
 		return null;
 	}
 
