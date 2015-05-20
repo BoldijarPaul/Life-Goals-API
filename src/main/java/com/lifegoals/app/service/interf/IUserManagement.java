@@ -12,10 +12,11 @@ public interface IUserManagement {
 
 	public User addUser(User user);
 
-	
 	public List<User> getAllUsers();
 
 	/* checks if a username is already taken , this method is service side only */
 	public boolean usernameIsTaken(String username);
+
+	public String getUsernameByUserId(int id);
 
 }

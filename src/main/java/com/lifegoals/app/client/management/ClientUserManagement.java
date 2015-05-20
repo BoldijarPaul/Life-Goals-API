@@ -11,18 +11,27 @@ public class ClientUserManagement {
 
 	/* returns all the clients on the server */
 	public static List<User> getAllUsers() {
-		return Arrays.asList(AppContext.getContext().doGetRequest("users/getall",User[].class));	
+		return Arrays.asList(AppContext.getContext().doGetRequest(
+				"users/getall", User[].class));
 	}
 
 	/* adds a new user */
 	public static User addUser(User user) {
-		return  AppContext.getContext().doPostRequest("users/add",user,User.class);	
-		 
+		return AppContext.getContext().doPostRequest("users/add", user,
+				User.class);
+
 	}
 
 	/* tries to login and return a LoginResult which also has a token */
 	public static LoginResult login(LoginInfo loginInfo) {
-		return  AppContext.getContext().doPostRequest("users/login",loginInfo,LoginResult.class);
+		return AppContext.getContext().doPostRequest("users/login", loginInfo,
+				LoginResult.class);
+	}
+
+	/* returning the string name of the user with that userId */
+	public static String getUsernameByUserId(int userId) {
+		return AppContext.getContext().doPostRequest("users/getname", userId,
+				String.class);
 	}
 
 }

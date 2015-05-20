@@ -26,8 +26,7 @@ public class UserServlet {
 	public Response getAll(@HeaderParam("Token") String token) {
 		if (!EntityValidationHelper.tokenValid(token)) {
 			return Response.status(Response.Status.UNAUTHORIZED)
-					.entity("You don't have access")
-					.build();
+					.entity("You don't have access").build();
 		}
 
 		/* the token is valid */
@@ -64,6 +63,13 @@ public class UserServlet {
 		return Response.ok(
 				ServiceLocator.get().getUserManagement().addUser(user),
 				MediaType.APPLICATION_JSON).build();
+	}
+
+	@POST
+	@Path("/getname")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getUsernameById(int id) {
+		return ServiceLocator.get().getUserManagement().getUsernameByUserId(id);
 	}
 
 }

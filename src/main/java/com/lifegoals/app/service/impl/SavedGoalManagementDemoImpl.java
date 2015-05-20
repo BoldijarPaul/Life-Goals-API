@@ -40,7 +40,9 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 
 	@Override
 	public SavedGoal addSavedGoal(SavedGoal savedGoal) {
+		/* creating a new saved goal, set an id, and current date time */
 		savedGoal.setId((int) (Math.random() * 1000));
+		savedGoal.setCreatedDate(System.currentTimeMillis());
 		savedGoals.add(savedGoal);
 		return savedGoal;
 	}

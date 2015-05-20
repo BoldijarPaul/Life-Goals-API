@@ -73,4 +73,14 @@ public class UserManagementDemoImpl implements IUserManagement {
 				return true;
 		return false;
 	}
+
+	@Override
+	public String getUsernameByUserId(int id) {
+		for (User user : users) {
+			if (user.getId() == id) {
+				return user.getName();
+			}
+		}
+		return null;
+	}
 }
