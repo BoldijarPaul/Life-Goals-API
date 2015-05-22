@@ -13,19 +13,32 @@ public class Context {
 	}
 
 	/* the root adress of the api */
-	public String root ;
+	private String root;
+	private int timeout = 10000; /* default 10 seconds */
 
+	/* set the timeout for the requests, in milliseconds */
+	public void setTimeout(int timeout) {
+		this.timeout = timeout;
+	}
+
+	/* set the root url adress of the server */
 	public void setRoot(String root) {
 		this.root = root;
 	}
 
-	/* for the get requets you can't set a body, for the others you can */
-	public  <T> T doGetRequest(String path, Class<T> type) {
+	/* this method will be called for each request */
+	private void handleUrlConnection(HttpURLConnection httpURLConnection) {
+		httpURLConnection.setConnectTimeout(timeout);
+	}
+
+	/* for the get requests you can't set a body, for the others you can */
+	public <T> T doGetRequest(String path, Class<T> type) {
 		try {
 			HttpURLConnection urlConnection = HttpHelper
-					.createHttpUrlConnection(root+path, "GET", null, token);
+					.createHttpUrlConnection(root + path, "GET", null, token);
 			String response = HttpHelper
 					.readHttpUrlConnectionResponse(urlConnection);
+			handleUrlConnection(urlConnection);
 			return HttpHelper.stringToObject(response, type);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -33,12 +46,13 @@ public class Context {
 		}
 	}
 
-	public  <T> T doPostRequest(String path, Object body, Class<T> type) {
+	public <T> T doPostRequest(String path, Object body, Class<T> type) {
 		try {
 			HttpURLConnection urlConnection = HttpHelper
-					.createHttpUrlConnection(root+path, "POST", body, token);
+					.createHttpUrlConnection(root + path, "POST", body, token);
 			String response = HttpHelper
 					.readHttpUrlConnectionResponse(urlConnection);
+			handleUrlConnection(urlConnection);
 			return HttpHelper.stringToObject(response, type);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,12 +60,13 @@ public class Context {
 		}
 	}
 
-	public  <T> T doDeleteRequest(String path, Object body, Class<T> type) {
+	public <T> T doDeleteRequest(String path, Object body, Class<T> type) {
 		try {
 			HttpURLConnection urlConnection = HttpHelper
-					.createHttpUrlConnection(root+path, "DELETE", body, token);
+					.createHttpUrlConnection(root + path, "DELETE", body, token);
 			String response = HttpHelper
 					.readHttpUrlConnectionResponse(urlConnection);
+			handleUrlConnection(urlConnection);
 			return HttpHelper.stringToObject(response, type);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,12 +74,13 @@ public class Context {
 		}
 	}
 
-	public  <T> T doPutRequest(String path, Object body, Class<T> type) {
+	public <T> T doPutRequest(String path, Object body, Class<T> type) {
 		try {
 			HttpURLConnection urlConnection = HttpHelper
-					.createHttpUrlConnection(root+path, "PUT", body, token);
+					.createHttpUrlConnection(root + path, "PUT", body, token);
 			String response = HttpHelper
 					.readHttpUrlConnectionResponse(urlConnection);
+			handleUrlConnection(urlConnection);
 			return HttpHelper.stringToObject(response, type);
 		} catch (Exception e) {
 			e.printStackTrace();
