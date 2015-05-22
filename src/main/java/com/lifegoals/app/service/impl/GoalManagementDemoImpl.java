@@ -17,13 +17,6 @@ public class GoalManagementDemoImpl implements IGoalManagement {
 	public GoalManagementDemoImpl() {
 		if (goals == null) {
 			goals = new ArrayList<Goal>();
-			String goalsJson = StoringHelper.readFile("goal");
-			if (goalsJson == null) {
-				save();
-				return;
-			}
-			Goal[] goalArray = new Gson().fromJson(goalsJson, Goal[].class);
-			goals.addAll(Arrays.asList(goalArray));
 
 		}
 	}
@@ -60,7 +53,7 @@ public class GoalManagementDemoImpl implements IGoalManagement {
 				goals.remove(i--);
 			}
 		}
-		save();
+
 		return goal;
 	}
 
@@ -76,14 +69,8 @@ public class GoalManagementDemoImpl implements IGoalManagement {
 		savedGoal.setUserId(goal.getUserId());
 
 		ServiceLocator.get().getSavedGoalManagement().addSavedGoal(savedGoal);
-		save();
-		return goal;
-	}
 
-	private void save() {
-		String gson = new Gson().toJson(goals.toArray());
-		System.out.println(gson);
-		StoringHelper.writeFile("goal", gson);
+		return goal;
 	}
 
 	@Override

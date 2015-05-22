@@ -28,7 +28,7 @@ public class Context {
 
 	/* this method will be called for each request */
 	private void handleUrlConnection(HttpURLConnection httpURLConnection) {
-		httpURLConnection.setConnectTimeout(timeout);
+		// httpURLConnection.setConnectTimeout(timeout);
 	}
 
 	/* for the get requests you can't set a body, for the others you can */

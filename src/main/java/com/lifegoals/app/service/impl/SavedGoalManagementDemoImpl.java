@@ -17,22 +17,7 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 	public SavedGoalManagementDemoImpl() {
 		if (savedGoals == null) {
 			savedGoals = new ArrayList<SavedGoal>();
-			String goalsJson = StoringHelper.readFile("savedgoal");
-			if (goalsJson == null) {
-				save();
-				return;
-			}
-			SavedGoal[] goalArray = new Gson().fromJson(goalsJson,
-					SavedGoal[].class);
-			savedGoals.addAll(Arrays.asList(goalArray));
-
 		}
-	}
-
-	private void save() {
-		String gson = new Gson().toJson(savedGoals.toArray());
-		System.out.println(gson);
-		StoringHelper.writeFile("savedgoal", gson);
 	}
 
 	@Override
@@ -52,7 +37,7 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 		savedGoal.setId((int) (Math.random() * 1000));
 		savedGoal.setCreatedDate(System.currentTimeMillis());
 		savedGoals.add(savedGoal);
-		save();
+
 		return savedGoal;
 	}
 
@@ -66,7 +51,7 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 				savedGoals.remove(i--);
 			}
 		}
-		save();
+
 		return goal;
 
 	}
@@ -90,7 +75,7 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 				return savedGoal;
 			}
 		}
-		save();
+
 		return null;
 	}
 
