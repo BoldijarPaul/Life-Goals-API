@@ -1,8 +1,6 @@
 package com.lifegoals.app.service.helper;
 
-import java.awt.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 public class CacheArrayList<T> extends ArrayList<T> {

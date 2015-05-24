@@ -1,15 +1,12 @@
 package com.lifegoals.app.service.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import com.google.gson.Gson;
 import com.lifegoals.app.entities.Goal;
 import com.lifegoals.app.entities.SavedGoal;
 import com.lifegoals.app.service.ServiceLocator;
 import com.lifegoals.app.service.helper.CacheArrayList;
-import com.lifegoals.app.service.helper.StoringHelper;
 import com.lifegoals.app.service.interf.ISavedGoalManagement;
 
 public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
