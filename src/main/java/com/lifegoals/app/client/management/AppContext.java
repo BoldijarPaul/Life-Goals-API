@@ -8,9 +8,9 @@ public class AppContext {
 	public static Context getContext() {
 		if (context == null) {
 			context = new Context();
-			context.setRoot("http://169.254.123.149:8080/api/");
+			// context.setRoot("http://169.254.123.149:8080/api/");
 			// context.setRoot("http://localhost:8080/api/");
-			// context.setRoot("http://app-leaderboards.rhcloud.com/api/");
+			context.setRoot("http://app-leaderboards.rhcloud.com/api/");
 			context.setToken("Token");
 		}
 		return context;

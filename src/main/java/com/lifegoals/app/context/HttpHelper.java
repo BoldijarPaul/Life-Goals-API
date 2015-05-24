@@ -21,11 +21,23 @@ public class HttpHelper {
 	}
 
 	/* reads the text from a httpurlconnection response */
-	public static String readHttpUrlConnectionResponse(
-			HttpURLConnection urlConnection) throws IOException {
-		InputStream inputStream = urlConnection.getInputStream();
-		String responseText = fromStream(inputStream);
-		return responseText;
+	public static HttpHelperResponse readHttpUrlConnectionResponse(
+			HttpURLConnection urlConnection) {
+		int code = 0;
+		String responseText = null;
+		try {
+			code = urlConnection.getResponseCode();
+			InputStream inputStream = (InputStream) urlConnection.getContent();
+			responseText = fromStream(inputStream);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/* returning the httphelperresponse entity */
+		HttpHelperResponse helperResponse = new HttpHelperResponse();
+		helperResponse.setContent(responseText);
+		helperResponse.setCode(code);
+		return helperResponse;
 	}
 
 	/*

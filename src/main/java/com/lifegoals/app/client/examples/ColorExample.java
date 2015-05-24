@@ -10,9 +10,9 @@ public class ColorExample {
 
 			@Override
 			public void onGetStatusCode(int code) {
-				System.out.println(code);
+				System.out.println(code + " code");
 			}
 		});
-		System.out.println(ClientColorManagement.getAllColors().length + "");
+		System.out.println(ClientColorManagement.getAllColors().length + " nr");
 	}
 }

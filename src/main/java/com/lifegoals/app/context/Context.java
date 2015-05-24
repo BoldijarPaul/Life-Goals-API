@@ -1,6 +1,5 @@
 package com.lifegoals.app.context;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 
 import com.lifegoals.app.client.management.ContextRequestListener;
@@ -33,14 +32,9 @@ public class Context {
 	}
 
 	/* this method will be called for each request */
-	private void handleUrlConnection(HttpURLConnection httpURLConnection) {
+	private void handleResponse(HttpHelperResponse response) {
 		if (contextRequestListener != null) {
-			try {
-				contextRequestListener.onGetStatusCode(httpURLConnection
-						.getResponseCode());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			contextRequestListener.onGetStatusCode(response.getCode());
 		}
 	}
 
@@ -49,10 +43,10 @@ public class Context {
 		try {
 			HttpURLConnection urlConnection = HttpHelper
 					.createHttpUrlConnection(root + path, "GET", null, token);
-			String response = HttpHelper
+			HttpHelperResponse response = HttpHelper
 					.readHttpUrlConnectionResponse(urlConnection);
-			handleUrlConnection(urlConnection);
-			return HttpHelper.stringToObject(response, type);
+			handleResponse(response);
+			return HttpHelper.stringToObject(response.getContent(), type);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -63,10 +57,10 @@ public class Context {
 		try {
 			HttpURLConnection urlConnection = HttpHelper
 					.createHttpUrlConnection(root + path, "POST", body, token);
-			String response = HttpHelper
+			HttpHelperResponse response = HttpHelper
 					.readHttpUrlConnectionResponse(urlConnection);
-			handleUrlConnection(urlConnection);
-			return HttpHelper.stringToObject(response, type);
+			handleResponse(response);
+			return HttpHelper.stringToObject(response.getContent(), type);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -77,10 +71,10 @@ public class Context {
 		try {
 			HttpURLConnection urlConnection = HttpHelper
 					.createHttpUrlConnection(root + path, "DELETE", body, token);
-			String response = HttpHelper
+			HttpHelperResponse response = HttpHelper
 					.readHttpUrlConnectionResponse(urlConnection);
-			handleUrlConnection(urlConnection);
-			return HttpHelper.stringToObject(response, type);
+			handleResponse(response);
+			return HttpHelper.stringToObject(response.getContent(), type);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -91,10 +85,10 @@ public class Context {
 		try {
 			HttpURLConnection urlConnection = HttpHelper
 					.createHttpUrlConnection(root + path, "PUT", body, token);
-			String response = HttpHelper
+			HttpHelperResponse response = HttpHelper
 					.readHttpUrlConnectionResponse(urlConnection);
-			handleUrlConnection(urlConnection);
-			return HttpHelper.stringToObject(response, type);
+			handleResponse(response);
+			return HttpHelper.stringToObject(response.getContent(), type);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
