@@ -51,6 +51,12 @@ public class GoalServlet {
 					.entity("The token does not belong to the selected user")
 					.build();
 		}
+		if (!ServiceLocator.get().getColorManagement()
+				.colorExists(goal.getColor())) {
+			/* the request has a color which is not in the app databse */
+			return Response.status(Response.Status.BAD_REQUEST)
+					.entity("The color is not valid!").build();
+		}
 		return Response.ok(
 				ServiceLocator.get().getGoalManagement().addGoal(goal),
 				MediaType.APPLICATION_JSON).build();
