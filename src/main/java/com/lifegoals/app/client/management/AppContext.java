@@ -17,6 +17,6 @@ public class AppContext {
 	}
 
 	public static void setRoot(String root) {
-		context.setRoot(root);
+		getContext().setRoot(root);
 	}
 }
