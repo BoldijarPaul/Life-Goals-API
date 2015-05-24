@@ -1,6 +1,8 @@
 package com.lifegoals.app.entities;
 
-public class SavedGoal {
+import java.io.Serializable;
+
+public class SavedGoal implements Serializable {
 
 	private int id;
 	private int userId;
@@ -13,16 +15,13 @@ public class SavedGoal {
 		return id;
 	}
 
-	
 	public long getCreatedDate() {
 		return createdDate;
 	}
 
-
 	public void setCreatedDate(long createdDate) {
 		this.createdDate = createdDate;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;

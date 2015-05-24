@@ -1,6 +1,8 @@
 package com.lifegoals.app.entities;
 
-public class Goal {
+import java.io.Serializable;
+
+public class Goal implements Serializable{
 	private int id;
 	private int color;
 	private String text;

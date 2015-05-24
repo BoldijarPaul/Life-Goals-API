@@ -1,47 +1,62 @@
 package com.lifegoals.app.service.helper;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.Scanner;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class StoringHelper {
 
-	public static void writeFile(String filename, String content) {
+	/* this method will write our object to the file */
+	public static void writeFile(String filename, Object object) {
 		try {
-			PrintWriter writer = new PrintWriter(filename, "UTF-8");
-			writer.print(content);
-			writer.close();
+			FileOutputStream fout = new FileOutputStream(filename);
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			oos.writeObject(object);
+			oos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static String readFile(String pathname) {
-
+	/* this method will read the file object */
+	public static <T> T readObjectFromFile(String filename) {
 		try {
-			File file = new File(pathname);
-			StringBuilder fileContents = new StringBuilder((int) file.length());
-			Scanner scanner = new Scanner(file);
-			String lineSeparator = System.getProperty("line.separator");
-
-			try {
-				while (scanner.hasNextLine()) {
-					fileContents.append(scanner.nextLine() + lineSeparator);
-				}
-				return fileContents.toString();
-			} finally {
-				scanner.close();
-			}
+			FileInputStream fin = new FileInputStream(filename);
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			Object obj = ois.readObject();
+			ois.close();
+			return (T) obj;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassCastException e) {
+			e.printStackTrace();
+			try {
+				File file = new File(filename);
+				file.delete();
+			} catch (Exception ex) {
+
+			}
 		}
 		return null;
+
 	}
+
 }

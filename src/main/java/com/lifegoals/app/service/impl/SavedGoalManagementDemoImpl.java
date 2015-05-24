@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.lifegoals.app.entities.Goal;
 import com.lifegoals.app.entities.SavedGoal;
 import com.lifegoals.app.service.ServiceLocator;
+import com.lifegoals.app.service.helper.CacheArrayList;
 import com.lifegoals.app.service.helper.StoringHelper;
 import com.lifegoals.app.service.interf.ISavedGoalManagement;
 
@@ -16,7 +17,7 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 
 	public SavedGoalManagementDemoImpl() {
 		if (savedGoals == null) {
-			savedGoals = new ArrayList<SavedGoal>();
+			savedGoals = new CacheArrayList<SavedGoal>("cache_saved_goals");
 		}
 	}
 
