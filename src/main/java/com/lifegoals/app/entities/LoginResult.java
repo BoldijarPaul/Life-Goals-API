@@ -1,6 +1,8 @@
 package com.lifegoals.app.entities;
 
-public class LoginResult {
+import java.io.Serializable;
+
+public class LoginResult implements Serializable {
 	/* true if login successfull */
 	private boolean success;
 	/* a token that will be used for the requests later */

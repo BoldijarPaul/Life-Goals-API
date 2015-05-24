@@ -1,6 +1,8 @@
 package com.lifegoals.app.entities;
 
-public class LoginInfo {
+import java.io.Serializable;
+
+public class LoginInfo implements Serializable{
 	/* this entity is used with the login */
 	private String name;
 	private String password;
