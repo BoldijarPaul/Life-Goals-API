@@ -1,6 +1,9 @@
 package com.lifegoals.app.context;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
+
+import com.lifegoals.app.client.management.ContextRequestListener;
 
 public class Context {
 	/* this class will handle all requests and (de)serializing of the objects */
@@ -14,21 +17,31 @@ public class Context {
 
 	/* the root adress of the api */
 	private String root;
-	private int timeout = 10000; /* default 10 seconds */
+	/* the request listener for the response code */
+	private ContextRequestListener contextRequestListener;
 
 	/* set the timeout for the requests, in milliseconds */
-	public void setTimeout(int timeout) {
-		this.timeout = timeout;
-	}
 
 	/* set the root url adress of the server */
 	public void setRoot(String root) {
 		this.root = root;
 	}
 
+	public void setOnContextRequestListener(
+			ContextRequestListener contextRequestListener) {
+		this.contextRequestListener = contextRequestListener;
+	}
+
 	/* this method will be called for each request */
 	private void handleUrlConnection(HttpURLConnection httpURLConnection) {
-		// httpURLConnection.setConnectTimeout(timeout);
+		if (contextRequestListener != null) {
+			try {
+				contextRequestListener.onGetStatusCode(httpURLConnection
+						.getResponseCode());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/* for the get requests you can't set a body, for the others you can */

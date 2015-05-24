@@ -19,4 +19,9 @@ public class AppContext {
 	public static void setRoot(String root) {
 		getContext().setRoot(root);
 	}
+
+	public static void setOnRequestListener(
+			ContextRequestListener contextRequestListener) {
+		getContext().setOnContextRequestListener(contextRequestListener);
+	}
 }
