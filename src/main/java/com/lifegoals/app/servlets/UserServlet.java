@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 import com.lifegoals.app.entities.LoginInfo;
 import com.lifegoals.app.entities.LoginResult;
+import com.lifegoals.app.entities.RegisterResponse;
 import com.lifegoals.app.entities.User;
 import com.lifegoals.app.service.ServiceLocator;
 import com.lifegoals.app.service.helper.EntityValidationHelper;
@@ -53,16 +54,15 @@ public class UserServlet {
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addUser(User user) {
-		if (!EntityValidationHelper.userValid(user)) {
-			// user not valid to add
-			return Response.status(Response.Status.BAD_REQUEST)
-					.entity("The user is invalid or name already taken")
-					.build();
+	public RegisterResponse addUser(User user) {
+
+		RegisterResponse registerResponse = EntityValidationHelper
+				.getUserRegisterResponse(user);
+		if (registerResponse.isSuccess()) {
+			registerResponse.setUser(ServiceLocator.get().getUserManagement()
+					.addUser(user));
 		}
-		return Response.ok(
-				ServiceLocator.get().getUserManagement().addUser(user),
-				MediaType.APPLICATION_JSON).build();
+		return registerResponse;
 	}
 
 	@POST

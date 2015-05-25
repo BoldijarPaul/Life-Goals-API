@@ -7,17 +7,14 @@ import com.lifegoals.app.entities.LoginResult;
 import com.lifegoals.app.entities.Token;
 import com.lifegoals.app.entities.User;
 import com.lifegoals.app.service.ServiceLocator;
+import com.lifegoals.app.service.helper.CacheArrayList;
 import com.lifegoals.app.service.interf.IUserManagement;
 
 public class UserManagementDemoImpl implements IUserManagement {
-	private static List<User> users = new ArrayList<User>();
+	private static List<User> users = new CacheArrayList<User>("cache_users");
 
 	public UserManagementDemoImpl() {
-		users.add(new User(1, "paul", "paul", System.currentTimeMillis()));
-		users.add(new User(2, "blabla", "da", System.currentTimeMillis()));
-		users.add(new User(3, "blabla", "nu", System.currentTimeMillis()));
-		users.add(new User(4, "blabla", "poate", System.currentTimeMillis()));
-		users.add(new User(5, "blabla", "smecher", System.currentTimeMillis()));
+
 	}
 
 	@Override
@@ -54,14 +51,14 @@ public class UserManagementDemoImpl implements IUserManagement {
 
 	@Override
 	public User addUser(User user) {
-		// TODO Auto-generated method stub
+		/* set a unique id for the user */
+		user.setId((int) (Math.random() * 10000));
 		users.add(user);
 		return user;
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
 		return users;
 	}
 
@@ -75,6 +72,15 @@ public class UserManagementDemoImpl implements IUserManagement {
 	}
 
 	@Override
+	public boolean emailIsTaken(String email) {
+		List<User> users = getAllUsers();
+		for (User user : users)
+			if (user.getEmail().toLowerCase().equals(email.toLowerCase()))
+				return true;
+		return false;
+	}
+
+	@Override
 	public String getUsernameByUserId(User user1) {
 		for (User user2 : users) {
 			if (user1.getId() == user2.getId()) {
@@ -83,4 +89,5 @@ public class UserManagementDemoImpl implements IUserManagement {
 		}
 		return null;
 	}
+
 }

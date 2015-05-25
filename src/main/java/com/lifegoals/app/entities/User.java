@@ -6,6 +6,7 @@ public class User implements Serializable {
 	private int id;
 	private String password;
 	private String name;
+	private String email;
 	private long createdDate;
 
 	public User() {
@@ -18,6 +19,14 @@ public class User implements Serializable {
 		this.password = password;
 		this.name = name;
 		this.createdDate = createdDate;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getId() {

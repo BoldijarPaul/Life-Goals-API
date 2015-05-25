@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.lifegoals.app.entities.LoginInfo;
 import com.lifegoals.app.entities.LoginResult;
+import com.lifegoals.app.entities.RegisterResponse;
 import com.lifegoals.app.entities.User;
 
 public class ClientUserManagement {
@@ -16,9 +17,9 @@ public class ClientUserManagement {
 	}
 
 	/* adds a new user */
-	public static User addUser(User user) {
+	public static RegisterResponse addUser(User user) {
 		return AppContext.getContext().doPostRequest("users/add", user,
-				User.class);
+				RegisterResponse.class);
 
 	}
 

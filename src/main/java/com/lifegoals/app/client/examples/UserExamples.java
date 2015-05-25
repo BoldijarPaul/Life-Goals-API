@@ -2,6 +2,7 @@ package com.lifegoals.app.client.examples;
 
 import java.util.List;
 
+import com.google.gson.Gson;
 import com.lifegoals.app.client.management.ClientUserManagement;
 import com.lifegoals.app.entities.LoginInfo;
 import com.lifegoals.app.entities.LoginResult;
@@ -30,7 +31,12 @@ public class UserExamples {
 
 	public static void main(String[] args) {
 		User user = new User();
-		user.setId(1);
-		System.out.println(ClientUserManagement.getUsernameByUserId(user));
+		user.setName("fmmzz");
+		user.setEmail("gtn2");
+		user.setPassword("");
+
+		System.out
+				.println(new Gson().toJson(ClientUserManagement.addUser(user)));
+
 	}
 }
