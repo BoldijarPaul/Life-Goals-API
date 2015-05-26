@@ -19,4 +19,7 @@ public interface ISavedGoalManagement {
 
 	/* will update the saved goal, by it's ID */
 	public SavedGoal updateSavedGoal(SavedGoal savedGoal);
+
+	/* returns true if the user already has a saved goal with that goal id */
+	public boolean savedGoalAlreadyExists(int userId, int goalId);
 }

@@ -77,4 +77,14 @@ public class SavedGoalManagementDemoImpl implements ISavedGoalManagement {
 		return null;
 	}
 
+	@Override
+	public boolean savedGoalAlreadyExists(int userId, int goalId) {
+		List<SavedGoal> savedGoals = getUserSavedGoals(userId);
+		for (SavedGoal savedGoal : savedGoals) {
+			if (savedGoal.getGoalId() == goalId)
+				return true; /* we found a goal with the same id */
+		}
+		return false;
+	}
+
 }

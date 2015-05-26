@@ -50,16 +50,28 @@ public class SavedGoalServlet {
 			return Response.status(Response.Status.UNAUTHORIZED)
 					.entity("You don't have access").build();
 		}
+		/* check if the saved goal entity is valid */
 		if (!EntityValidationHelper.savedGoalValid(savedGoal)) {
 			return Response.status(Response.Status.BAD_REQUEST)
 					.entity("The goal is invalid").build();
 		}
+		/* check if the goal isn't already added to this user saved goals */
+		if (ServiceLocator
+				.get()
+				.getSavedGoalManagement()
+				.savedGoalAlreadyExists(savedGoal.getUserId(),
+						savedGoal.getGoalId())) {
+			return Response.status(Response.Status.BAD_REQUEST)
+					.entity("Goal already added").build();
+		}
+		/* check if token belongs to user */
 		if (!EntityValidationHelper.tokenValidForUser(token,
 				savedGoal.getUserId())) {
 			return Response.status(Response.Status.BAD_REQUEST)
 					.entity("The token does not belong to the selected user")
 					.build();
 		}
+		/* everything is ok here, return the saved goal */
 		return Response.ok(
 				ServiceLocator.get().getSavedGoalManagement()
 						.addSavedGoal(savedGoal), MediaType.APPLICATION_JSON)
