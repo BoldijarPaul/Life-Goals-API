@@ -29,9 +29,22 @@ public class GoalServlet {
 	@POST
 	@Path("/getfromuser")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Goal> getGoalsFromUser(User user) {
-		return ServiceLocator.get().getGoalManagement()
-				.getUserGoals(user.getId());
+	public Response getGoalsFromUser(User user,
+			@HeaderParam("Token") String token) {
+		/* check if token is valid and belongs to user */
+		if (!EntityValidationHelper.tokenValid(token)) {
+			return Response.status(Response.Status.UNAUTHORIZED)
+					.entity("You don't have access").build();
+		}
+		if (!EntityValidationHelper.tokenValidForUser(token, user.getId())) {
+			return Response.status(Response.Status.BAD_REQUEST)
+					.entity("The token does not belong to the selected user")
+					.build();
+		}
+		/* everything is ok, return the goals */
+		List<Goal> goals = ServiceLocator.get().getGoalManagement()
+				.getUserGoals(user.getId(), true);
+		return Response.ok(goals, MediaType.APPLICATION_JSON).build();
 	}
 
 	@POST

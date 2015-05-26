@@ -7,12 +7,12 @@ import com.lifegoals.app.entities.Goal;
 public interface IGoalManagement {
 	public List<Goal> getAllGoals();
 
-	public List<Goal> getUserGoals(int userId);
+	public List<Goal> getUserGoals(int userId, boolean showPrivateGoals);
 
 	public Goal deleteGoal(int id);
 
 	public Goal addGoal(Goal goal);
-	
+
 	public Goal getGoalById(int id);
 
 }
