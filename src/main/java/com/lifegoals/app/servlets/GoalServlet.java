@@ -7,12 +7,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.lifegoals.app.entities.Goal;
+import com.lifegoals.app.entities.User;
 import com.lifegoals.app.service.ServiceLocator;
 import com.lifegoals.app.service.helper.EntityValidationHelper;
 
@@ -26,11 +26,12 @@ public class GoalServlet {
 		return ServiceLocator.get().getGoalManagement().getAllGoals();
 	}
 
-	@GET
-	@Path("/getbyuserid/{param}")
+	@POST
+	@Path("/getfromuser")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Goal> getGoalsFromUser(@PathParam("param") int id) {
-		return ServiceLocator.get().getGoalManagement().getUserGoals(id);
+	public List<Goal> getGoalsFromUser(User user) {
+		return ServiceLocator.get().getGoalManagement()
+				.getUserGoals(user.getId());
 	}
 
 	@POST
