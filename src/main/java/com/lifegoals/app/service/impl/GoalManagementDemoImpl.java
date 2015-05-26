@@ -35,7 +35,6 @@ public class GoalManagementDemoImpl implements IGoalManagement {
 	public List<Goal> getUserGoals(int userId, boolean showPrivateGoals) {
 		List<Goal> userGoals = new ArrayList<Goal>();
 		for (Goal goal : goals) {
-
 			if (goal.getUserId() == userId && goal.isPublicGoal()) {
 				userGoals.add(goal);
 			} else {
