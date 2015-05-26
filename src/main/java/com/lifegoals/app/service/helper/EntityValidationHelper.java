@@ -72,6 +72,8 @@ public class EntityValidationHelper {
 	public static boolean savedGoalValid(SavedGoal savedGoal) {
 		if (savedGoal.getGoalId() == 0)
 			return false;
+		if (savedGoal.getUserId() == 0)
+			return false;
 		return true;
 	}
 }
