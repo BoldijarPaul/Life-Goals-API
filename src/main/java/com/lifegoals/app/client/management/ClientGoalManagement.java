@@ -15,8 +15,8 @@ public class ClientGoalManagement {
 	}
 
 	public static List<Goal> getUserGoals(User user) {
-		Goal[] goals = AppContext.getContext().doGetRequest(
-				"goals/getfromuser", Goal[].class);
+		Goal[] goals = AppContext.getContext().doPostRequest(
+				"goals/getfromuser", user, Goal[].class);
 		return Arrays.asList(goals);
 	}
 
