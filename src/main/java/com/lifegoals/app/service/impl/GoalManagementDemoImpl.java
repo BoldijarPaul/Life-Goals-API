@@ -24,7 +24,7 @@ public class GoalManagementDemoImpl implements IGoalManagement {
 		List<Goal> userGoals = new ArrayList<Goal>();
 		for (Goal goal : goals) {
 			/* only return public goals */
-			if (goal.isPublicGoal()) {
+			if (goal.isPublicGoal() && goal.isVisible()) {
 				userGoals.add(goal);
 			}
 		}
@@ -35,10 +35,12 @@ public class GoalManagementDemoImpl implements IGoalManagement {
 	public List<Goal> getUserGoals(int userId, boolean showPrivateGoals) {
 		List<Goal> userGoals = new ArrayList<Goal>();
 		for (Goal goal : goals) {
-			if (goal.getUserId() == userId && goal.isPublicGoal()) {
+			if (goal.getUserId() == userId && goal.isPublicGoal()
+					&& goal.isVisible()) {
 				userGoals.add(goal);
 			} else {
-				if (showPrivateGoals && goal.getUserId() == userId) {
+				if (showPrivateGoals && goal.getUserId() == userId
+						&& goal.isVisible()) {
 					/* the goal is private and we want to get it as well */
 					userGoals.add(goal);
 				}
@@ -50,11 +52,12 @@ public class GoalManagementDemoImpl implements IGoalManagement {
 
 	@Override
 	public Goal deleteGoal(int id) {
+		/* a goal can't be deleted from the server, it will just be hidden */
 		Goal goal = null;
 		for (int i = 0; i < goals.size(); i++) {
 			if (goals.get(i).getId() == id) {
 				goal = goals.get(i);
-				goals.remove(i--);
+				goal.setVisible(false);
 			}
 		}
 
